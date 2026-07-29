@@ -10,7 +10,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
 <style type="text/css">
-/* Design Credits: Jon Barron and Deepak Pathak and Abhishek Kar and Saurabh Gupta */
 a {
   color: #1772d0;
   text-decoration:none;
@@ -53,10 +52,109 @@ pageheading {
   border-width: 1px;
   border-color: Black;
 }
+.zoomable {
+  cursor: zoom-in;
+}
+body.lightbox-open #page {
+  filter: blur(6px);
+}
+.carousel {
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+  line-height: 0;
+}
+.carousel-slide {
+  display: none;
+  width: 100%;
+  aspect-ratio: 8 / 5;
+  object-fit: cover;
+  border-radius: 15px;
+}
+.carousel-slide.active {
+  display: block;
+}
+.life-photo {
+  display: block;
+  width: 90%;
+  margin: 0 auto;
+  aspect-ratio: 8 / 5;
+  object-fit: cover;
+  border-radius: 15px;
+}
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  width: 30px;
+  height: 44px;
+  padding: 0;
+  font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 44px;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  border-radius: 6px;
+}
+.carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+.carousel-arrow.prev {
+  left: 8px;
+}
+.carousel-arrow.next {
+  right: 8px;
+}
+.carousel-dots {
+  line-height: 1;
+  padding-top: 8px;
+  text-align: center;
+}
+.carousel-dots span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 3px;
+  border-radius: 50%;
+  background: #c3cdd8;
+}
+.carousel-dots span.active {
+  background: #1772d0;
+}
+body.lightbox-open {
+  overflow: hidden;
+}
+#lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  padding: 30px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.45);
+  cursor: zoom-out;
+  align-items: center;
+  justify-content: center;
+}
+#lightbox.open {
+  display: flex;
+}
+#lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+}
 </style>
 </head>
 
 <body>
+<div id="page">
 <table width="900" border="0" align="center" cellspacing="0" cellpadding="20">
 <tbody><tr><td>
 
@@ -66,28 +164,25 @@ pageheading {
 
 
 <tbody><tr>
-  <td width="30%" valign="top"><a href="#"><img src="./assets/avatar-placeholder.svg" width="100%" style="border-radius:15px"></a>
+  <td width="30%" valign="top"><a href="./assets/zeyang_profile.jpg" onclick="return openLightbox(this.href)"><img src="./assets/zeyang_profile.jpg" width="100%" class="zoomable" style="border-radius:15px"></a>
   <p align="center">
   | <a href="#">CV</a> |
-  <a href="mailto:your-email@example.com">Email</a> |
+  <a href="mailto:zeyang2022@gmail.com">Email</a> |
   <a href="#">Google Scholar</a> |
   <br>
-  | <a href="#">Github</a> |
-  <a href="#">LinkedIn</a> |
-  <a href="#">X</a> |
+  | <a href="https://www.linkedin.com/in/zeyang-zhang-4a780331a">LinkedIn</a> |
   </p>
   </td>
   <td width="70%" valign="top" align="justify">
-    <p>I am a [your title/role] at <a href="#">[Institution / Company]</a>.
+    <p>I am a Research Assistant in the <a href="https://lab-msp.com/MSP/MSPpeople.html">Multimodal Speech Processing (MSP) Laboratory</a> and an AI Researcher in the <a href="https://www.cmu.edu/tepper/accounting-lab/people/index.html">Accounting AI Research Lab</a>.
     </p>
-    <p>I [received / am pursuing] my [degree] from [Department] at <a href="#">[University]</a>, where I was advised by <a href="#">[Advisor Name]</a>.
+    <p>I received my M.S. in Artificial Intelligence Engineering from <a href="https://www.cmu.edu/">Carnegie Mellon University</a>, where I was advised by <a href="https://lab-msp.com/index.html">Prof. Carlos Busso</a> at the <a href="https://www.lti.cs.cmu.edu/">Language Technologies Institute</a>. My master's thesis is <a href="https://www.proquest.com/dissertations-theses/cross-modal-learning-through-hierarchical/docview/3341558886/se-2?accountid=9902">Cross-Modal Learning Through Hierarchical Quantized Embeddings</a>.
     </p>
-    <p>Before that, I received my [degree] in [Field] from <a href="#">[University]</a>.
+    <p>Before that, I received my B.S. in Computer Science from the <a href="https://illinois.edu/">University of Illinois at Urbana-Champaign</a>.
     </p>
-    <p><strong>Goal:</strong> [One sentence describing your long-term goal.]</p>
-    <p><strong>Research Interest:</strong> [The intersection of <u>topic one</u>, <u>topic two</u>, and <u>topic three</u>.]</p>
-    <p><strong>Research Question:</strong> [The central question your research tries to answer.]</p>
-    <p>Email: your-email [AT] example.com
+    <p><strong>Goal:</strong> Build multimodal machine learning systems that jointly reason over text, video, audio, IMU, gaze, and other modalities, learning semantic and affective representations that deepen our understanding of human interaction and turning that understanding into the next generation of multimodal agents.</p>
+    <p><strong>Research Interest:</strong> The intersection of <u>representation learning</u>, <u>multimodal machine learning</u>, <u>signal processing</u>, <u>human interaction</u>, <u>AI agents</u>, <u>graph neural networks</u>, and <u>multimodal LLMs</u>.</p>
+    <p>Email: zeyang2022 [AT] gmail.com
     </p>
   </td>
 </tr>
@@ -99,9 +194,11 @@ pageheading {
   <tbody><tr><td><sectionheading>&nbsp;&nbsp;News</sectionheading></td></tr>
 </tbody></table>
 <ul>
-        <li>[MM/YYYY] Your news item here.</li>
-        <li>[MM/YYYY] Your news item here.</li>
-        <li>[MM/YYYY] Your news item here.</li>
+        <li>[07/2026] Our paper <b><i>Hierarchical Quantized Cross-modal Masked Autoencoders for Audio-Visual Emotion Recognition</i></b> has been accepted as a <b>long paper</b> at the 28th ACM International Conference on Multimodal Interaction (ICMI) 2026!</li>
+        <li>[07/2026] Our paper <b><i>Speaker Diarization in Static and Egocentric Videos via Speech-Face Alignment</i></b> has been accepted as a <b>long paper</b> at the 28th ACM International Conference on Multimodal Interaction (ICMI) 2026!</li>
+        <li>[05/2026] Graduated from <b>Carnegie Mellon University</b> with an M.S. in Artificial Intelligence Engineering (GPA: 3.94/4.00).</li>
+        <li>[01/2026] Our paper <b><i>Contrastive Gated Fusion for Multilingual Speaker Verification</i></b>, submitted to the ICASSP Grand Challenge <i>GC-6: Face-Voice Association in Multilingual Environments (FAME)</i>, has been accepted for inclusion in the ICASSP Workshop Proceedings!</li>
+        <li>[05/2024] Graduated from the <b>University of Illinois at Urbana-Champaign</b> with a B.S. in Computer Science with Highest Honors (GPA: 3.94/4.00).</li>
       </ul>
 
 <hr>
@@ -115,20 +212,51 @@ pageheading {
 
 
   <tbody><tr>
-    <td width="40%" valign="top" align="center"><a href="#">
-    <img src="./assets/media-placeholder.svg" alt="sym" width="90%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;">
+    <td width="40%" valign="top" align="center"><a href="./assets/Zeyang_thumbnail.jpg" onclick="return openLightbox(this.href)">
+    <img src="./assets/Zeyang_thumbnail.jpg" alt="sym" width="90%" class="zoomable" style="padding-top:0px;padding-bottom:0px;border-radius:15px;">
     </a></td>
     <td width="60%" valign="top">
-      <p><a href="#" id="PAPER1">
-      <heading>[Paper Title Placeholder]</heading></a><br>
-      [Author One, Author Two, Author Three]<br>
-      [Venue Year]<br>
+      <p><a href="https://doi.org/10.1145/3776574.3831121" id="HQCMAE">
+      <heading>Hierarchical Quantized Cross-modal Masked Autoencoders for Audio-Visual Emotion Recognition</heading></a><br>
+      <b>Zeyang Zhang</b> and Carlos Busso. 2026.<br>
+      In INTERNATIONAL CONFERENCE ON MULTIMODAL INTERACTION (ICMI '26), October 05–09, 2026, Napoli, Italy. ACM, New York, NY, USA, 10 pages.<br>
       </p>
-      <div class="paper" id="paper1">
-      <a href="#">webpage</a> |
-      <a href="#">pdf</a> |
-      <a href="#">arXiv</a> |
-      <a href="#">code</a>
+      <div class="paper" id="hqcmae">
+      <a href="./assets/icmi26-25-final_version.pdf">pdf</a> |
+      <a href="https://doi.org/10.1145/3776574.3831121">doi</a>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td width="40%" valign="top" align="center"><a href="./assets/Zeyang_Xavier_thumbnail.jpg" onclick="return openLightbox(this.href)">
+    <img src="./assets/Zeyang_Xavier_thumbnail.jpg" alt="sym" width="90%" class="zoomable" style="padding-top:0px;padding-bottom:0px;border-radius:15px;">
+    </a></td>
+    <td width="60%" valign="top">
+      <p><a href="https://doi.org/10.1145/3776574.3831222" id="SPEAKERDIARIZATION">
+      <heading>Speaker Diarization in Static and Egocentric Videos via Speech-Face Alignment</heading></a><br>
+      <b>Zeyang Zhang</b>, Xavier Yin, Zhaobo Zheng, Kumar Akash, Teruhisa Misu, and Carlos Busso. 2026.<br>
+      In INTERNATIONAL CONFERENCE ON MULTIMODAL INTERACTION (ICMI '26), October 05–09, 2026, Napoli, Italy. ACM, New York, NY, USA, 10 pages.<br>
+      </p>
+      <div class="paper" id="speakerdiarization">
+      <a href="https://doi.org/10.1145/3776574.3831222">doi</a>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td width="40%" valign="top" align="center"><a href="./assets/LSMA_final.png" onclick="return openLightbox(this.href)">
+    <img src="./assets/LSMA_final.png" alt="sym" width="90%" class="zoomable" style="padding-top:0px;padding-bottom:0px;border-radius:15px;">
+    </a></td>
+    <td width="60%" valign="top">
+      <p><a href="https://doi.org/10.1109/ICASSP55912.2026.11461395" id="CGF">
+      <heading>Contrastive Gated Fusion for Multilingual Speaker Verification</heading></a><br>
+      <b>Zeyang Zhang</b>, Katsuhiko Naito, and Hajer Dahmani. 2026.<br>
+      In ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Barcelona, Spain, pp. 21775-21777.<br>
+      </p>
+      <div class="paper" id="cgf">
+      <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=11461395">pdf</a> |
+      <a href="https://doi.org/10.1109/ICASSP55912.2026.11461395">doi</a>
       </div>
     </td>
   </tr>
@@ -144,20 +272,22 @@ pageheading {
 
   <tbody><tr>
     <td width="40%" valign="top" align="center">
-      <a href="#">
-          <img src="./assets/media-placeholder.svg" alt="sym" width="90%" style="padding-top:0px; padding-bottom:0px; border-radius:15px; height: auto;">
+      <a href="./assets/coming-soon.svg" onclick="return openLightbox(this.href)">
+          <img src="./assets/coming-soon.svg" alt="sym" width="90%" class="zoomable" style="padding-top:0px; padding-bottom:0px; border-radius:15px; height: auto;">
       </a>
     </td>
     <td width="60%" valign="top">
       <p><a href="#" id="PROJECT1">
-      <heading>[Project Title Placeholder]</heading></a><br>
+      <heading>Ranking Individual State from Multimodal Inputs</heading></a><br>
       </p>
 
       <div class="paper" id="project1">
+      <!--
       <a href="#">Code</a> |
       <a href="#">Project Page</a>
+      -->
 
-      <p align="justify">[One or two sentence description of the project.]</p>
+      <p align="justify">Using RankNet to perform pairwise ranking of an individual's state from their performance, jointly leveraging multiple temporally aligned modalities such as audio, video, IMU, gaze, semantic segmentation, and more.</p>
 
       </div>
     </td>
@@ -172,9 +302,7 @@ pageheading {
 <table width="100%" align="center" border="0" cellspacing="0" cellpadding="15">
   <tbody><tr>
     <td style="padding:20px;width:100%;vertical-align:middle">
-      [Conference/Journal Name] <b>(ABBR)</b> [Year]
-      <br>
-      [Conference/Journal Name] <b>(ABBR)</b> [Year]
+      International Conference on Multimodal Interaction <b>(ICMI)</b> 2026
       <p></p>
     </td>
   </tr>
@@ -182,12 +310,116 @@ pageheading {
 
 <hr>
 
-<table width="100%" align="center" border="0" cellspacing="0" cellpadding="2">
-    <tbody><tr><td><br><p align="right">
-    Website template from <a href="http://www.cs.berkeley.edu/~barron/">here</a> and <a href="http://www.cs.cmu.edu/~dpathak/">here</a>
-    </p></td></tr>
+<table width="100%" align="center" border="0" cellspacing="0" cellpadding="10">
+  <tbody><tr><td><sectionheading>&nbsp;&nbsp;Life is Good</sectionheading></td></tr>
 </tbody></table>
+
+<table width="100%" align="center" border="0" cellspacing="0" cellpadding="15">
+
+  <tbody><tr>
+    <td width="40%" valign="top" align="center"><a href="./assets/aa32ad8e6bc954a02b5eab4a59753370.jpg" onclick="return openLightbox(this.href)">
+    <img src="./assets/aa32ad8e6bc954a02b5eab4a59753370.jpg" alt="sym" class="zoomable life-photo">
+    </a></td>
+    <td width="60%" valign="middle" align="justify">
+      <p>My dog Kevin just turned 12, and he still greets me like a puppy every single day!</p>
+    </td>
+  </tr>
+
+  <tr>
+    <td width="40%" valign="top" align="center">
+      <div class="carousel" data-interval="4000">
+        <img class="carousel-slide active" src="./assets/bf23b7261e1a0355e914ad3150a0cf1d.jpg" alt="sym" onclick="return openLightbox(this.src)">
+        <img class="carousel-slide" src="./assets/e896631d78dba84a7e338edb9a84b913.jpg" alt="sym" onclick="return openLightbox(this.src)">
+        <button type="button" class="carousel-arrow prev" onclick="carouselStep(this, -1)" aria-label="Previous photo">&#10094;</button>
+        <button type="button" class="carousel-arrow next" onclick="carouselStep(this, 1)" aria-label="Next photo">&#10095;</button>
+        <div class="carousel-dots"></div>
+      </div>
+    </td>
+    <td width="60%" valign="middle" align="justify">
+      <p>I play table tennis at CMU whenever I get the chance, come find me for a match! I also just picked up tennis two months ago, and I am already completely hooked!</p>
+    </td>
+  </tr>
+
+  <tr>
+    <td width="40%" valign="top" align="center">
+      <div class="carousel" data-interval="4000">
+        <img class="carousel-slide active" src="./assets/2bd5cafd51707279a5e6d153537b5a42.jpg" alt="sym" onclick="return openLightbox(this.src)">
+        <img class="carousel-slide" src="./assets/f9361f5c78337d13391844e9c4435668.jpg" alt="sym" onclick="return openLightbox(this.src)">
+        <img class="carousel-slide" src="./assets/7f5f720cb22a92c5cebec606699da7fc.jpg" alt="sym" onclick="return openLightbox(this.src)">
+        <img class="carousel-slide" src="./assets/2500b14811c08785d9b94fd0f233e95a.jpg" alt="sym" onclick="return openLightbox(this.src)" style="object-position: 50% 70%;">
+        <img class="carousel-slide" src="./assets/ae7184327e531351117d1736d2bceb38.jpg" alt="sym" onclick="return openLightbox(this.src)">
+        <img class="carousel-slide" src="./assets/ced1dcbc00a15fa7f368902ecb222c57.jpg" alt="sym" onclick="return openLightbox(this.src)">
+        <img class="carousel-slide" src="./assets/709f8f8d70cd23f62951a091df418ab4.jpg" alt="sym" onclick="return openLightbox(this.src)">
+        <img class="carousel-slide" src="./assets/6dd6fb433e1b749375ecab270c5c2d15.jpg" alt="sym" onclick="return openLightbox(this.src)">
+        <button type="button" class="carousel-arrow prev" onclick="carouselStep(this, -1)" aria-label="Previous photo">&#10094;</button>
+        <button type="button" class="carousel-arrow next" onclick="carouselStep(this, 1)" aria-label="Next photo">&#10095;</button>
+        <div class="carousel-dots"></div>
+      </div>
+    </td>
+    <td width="60%" valign="middle" align="justify">
+      <p>My friends over the years, the people who have made all of this so much fun! I love traveling, hanging out with friends, and hunting down great restaurants!</p>
+    </td>
+  </tr>
+
+</tbody></table>
+
+<hr>
 
   </td></tr>
 </tbody></table>
+</div>
+
+<div id="lightbox" onclick="closeLightbox()"><img id="lightbox-img" src="" alt=""></div>
+
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.classList.add('lightbox-open');
+  return false;
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.classList.remove('lightbox-open');
+}
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') { closeLightbox(); }
+});
+
+function showSlide(carousel, index) {
+  var slides = carousel.slides;
+  carousel.index = (index + slides.length) % slides.length;
+  for (var i = 0; i < slides.length; i++) {
+    slides[i].classList.toggle('active', i === carousel.index);
+    carousel.dots[i].classList.toggle('active', i === carousel.index);
+  }
+}
+function autoAdvance(carousel) {
+  clearInterval(carousel.timer);
+  carousel.timer = setInterval(function () {
+    showSlide(carousel, carousel.index + 1);
+  }, Number(carousel.getAttribute('data-interval')) || 4000);
+}
+function carouselStep(button, direction) {
+  var carousel = button.parentNode;
+  showSlide(carousel, carousel.index + direction);
+  autoAdvance(carousel);
+  return false;
+}
+(function () {
+  var carousels = document.querySelectorAll('.carousel');
+  for (var c = 0; c < carousels.length; c++) {
+    var carousel = carousels[c];
+    carousel.slides = carousel.querySelectorAll('.carousel-slide');
+    carousel.index = 0;
+    var dots = carousel.querySelector('.carousel-dots');
+    for (var i = 0; i < carousel.slides.length; i++) {
+      dots.appendChild(document.createElement('span'));
+    }
+    carousel.dots = dots.querySelectorAll('span');
+    showSlide(carousel, 0);
+    autoAdvance(carousel);
+  }
+})();
+</script>
 </body></html>
