@@ -87,7 +87,7 @@ sectionheading {
 }
 pageheading {
   font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
-  font-size: 38px;
+  font-size: clamp(26px, 7vw, 38px);
   font-weight: 400
 }
 .ImageBorder {
@@ -192,12 +192,77 @@ body.lightbox-open {
   border-radius: 10px;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
 }
+
+/* Responsive layout */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  overflow-wrap: break-word;
+}
+#page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+@media (max-width: 680px) {
+  body {
+    margin: 0;
+  }
+  body, td, th, strong {
+    font-size: 17px;
+  }
+  heading {
+    font-size: 18px;
+  }
+  /* Stack every two-column row (photo | text) into a single column */
+  #page table, #page tbody, #page tr, #page td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  #page td {
+    padding: 10px 8px;
+    text-align: left;
+  }
+  /* Photo cells */
+  #page td[width="30%"], #page td[width="40%"] {
+    padding: 14px 8px 6px;
+    text-align: center;
+  }
+  /* Text cells */
+  #page td[width="70%"], #page td[width="60%"] {
+    padding: 0 8px 18px;
+  }
+  #page td[width="30%"] img {
+    max-width: 260px;
+  }
+  ul {
+    padding-left: 22px;
+    padding-right: 8px;
+  }
+  ul ul {
+    padding-left: 18px;
+    padding-right: 0;
+  }
+  .carousel-arrow {
+    width: 36px;
+    height: 48px;
+    line-height: 48px;
+  }
+  #lightbox {
+    padding: 12px;
+  }
+}
 </style>
 </head>
 
 <body>
 <div id="page">
-<table width="900" border="0" align="center" cellspacing="0" cellpadding="20">
+<table width="100%" border="0" align="center" cellspacing="0" cellpadding="20">
 <tbody><tr><td>
 
 <p align="center">
@@ -208,7 +273,7 @@ body.lightbox-open {
 <tbody><tr>
   <td width="30%" valign="top"><a href="./assets/zeyang_profile.jpg" onclick="return openLightbox(this.href)"><img src="./assets/zeyang_profile.jpg" width="100%" class="zoomable" style="border-radius:15px"></a>
   <p align="center">
-  | <a href="./assets/Zeyang_Zhang_CV.pdf">CV</a> |
+  | <a href="./assets/Zeyang_Zhang_CV.pdf?v=20261008">CV</a> |
   <a href="mailto:zeyangz@andrew.cmu.edu">Email</a> |
   <a href="https://scholar.google.com/citations?user=Sz__QH8AAAAJ&hl=en">Google Scholar</a> |
   <br>
